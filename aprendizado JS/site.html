@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" media="all" href="css/reset.css" /> <!-- reset css -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<title>horario de brasilia</title>
+    
+    <style type="text/css">
+
+        div#resposta{
+            background-color: gray;
+            width: 400px;
+            height: 200px;
+        }
+    </style>
+
+    <script type="text/javascript">
+    	function carregarHorario() {
+	    	var data = new Date()
+	    	var imagem = document.getElementById("IdImagem")
+	    	var horas = data.getHours()
+	    	horas = 10
+	    	if (horas>=18) {
+	    		imagem.src = 'imagem_Noite.png'
+	    	}else if (horas>12) {
+	    		imagem.src = "imagem_Tarde.png"
+	    	}else{
+	    		imagem.src = "imagem_Dia.png"
+	    	}
+    	}
+    </script>
+</head>
+
+<body onload="carregarHorario()">
+    <div id="resposta">horario
+    </div>
+    <br><br>
+        <img id="IdImagem" src="asdf.asdf">
+</body>
+</html>
