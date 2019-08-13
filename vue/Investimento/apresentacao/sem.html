@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="tudo.css">
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+
+	<title>tip Invest</title>
+
+</head>
+<body >
+<div id="site">
+
+	<barra-navegacao-esquerda style="display: inline-block;">
+		<span slot="somatorio_saldo">{{somatorio_saldo}}</span>
+		<div slot="somas_saldo" v-for="soma in somas_saldo">
+			<div class="nome-banco">
+				{{soma.banco}}
+			</div>
+			<div class="valor-banco">
+				<strong>+</strong> {{soma.valor}} R$
+			</div><br>
+		</div>
+
+		<span slot="somatorio_investido">{{somatorio_investido}}</span>
+		<div slot="somas_investido" v-for="soma in somas_investido">
+			<div class="nome-banco">
+				{{soma.banco}}
+			</div>
+			<div class="valor-banco">
+				<strong>+</strong> {{soma.valor}} R$
+			</div><br>
+		</div>
+
+		<span slot="somatorio_rendimento">{{somatorio_rendimento}}</span>
+		<div slot="somas_rendimento" v-for="soma in somas_rendimento">
+			<div class="nome-banco">
+				{{soma.banco}}
+			</div>
+			<div class="valor-banco">
+				<strong>+</strong> {{soma.valor}} R$
+			</div><br>
+		</div>
+	</barra-navegacao-esquerda>
+
+	<menu-superior class="menu-superior"></menu-superior>
+
+	<div v-if="tem_investimento" class="row container">
+		<div class="botao_invista_ja  alert alert-danger" style="margin-left: 60%;">
+			Voce nao possui investimentos,
+			<div class="botao-colorido btn" > <router-link to="/simulador" style="color: #fff">invista já </router-link></div>
+		</div>
+	</div>
+
+	<router-view>
+		<div slot="sanfoninha" v-for="elemento in lista_investimentos_home"  class="container incarte">
+		  <div class="panel-group">
+		    <div class="panel panel-default">
+		      <div class="panel-heading">
+		        <h4 class="panel-title">
+		          <a data-toggle="collapse" data-parent="#accordion" v-bind:href="elemento.id_investimento">
+		          	<ul class="list-inline lista-detalhes">
+		          		<li>{{elemento.nome_investimento}}</li>
+		          		<li>{{elemento.nome_banco_menor}}</li>
+		          		<li>{{elemento.risco}}</li>
+		          		<li>{{elemento.rentabilidade}}</li>
+		          		<li><span class="glyphicon glyphicon-chevron-down"></span></li>
+		          	</ul>
+		          </a>
+		        </h4>
+		      </div>
+		      <div v-bind:id="elemento.id_investimento2" class="panel-collapse collapse">
+		        <div class="panel-body">
+		        	<table class="table cor-corpo-sanfoninha" >
+		        		<tr>
+		        			<td rowspan="2" style="width: 500px;">
+					        	<div class="plotagem" style="padding-left: 50px;">
+					        		<div class="barra barra-cinza">
+					        			<span class="ganho letra-pequena">
+					        				Ganho de <strong class="letra-maior">{{elemento.ganho_menor}}</strong>
+					        			</span>
+					        			<span class="banco">
+					        				{{elemento.nome_investimento}}
+					        			</span>
+					        		</div>
+					        		<div class="barra barra-roxa">
+					        			<span class="ganho letra-pequena">
+					        				Ganho de <strong class="letra-maior">{{elemento.ganho_maior}}</strong>
+					        			</span>
+					        			<span class="banco">
+					        				{{elemento.nome_acao}} {{elemento.nome_banco_maior}}
+					        			</span>
+					        		</div>
+					        	</div>
+					        	<div class="botoes" style="padding-left: 50px;">
+					        		<div class="btn botao-bonito botao-colorido" data-toggle="modal" data-target="#popResgate">Resgatar</div>
+					        	</div>
+		        			</td>
+		        			<td> <div class="rotulo letra-maior"> Aporte </div> <br> <div class="dado1"><strong>{{elemento.aporte}}</strong> </div> </td>
+		        			<td> <div class="rotulo letra-maior"> Prazo </div><br><div class="dado1"><strong> {{elemento.prazo}}</strong> </div> </td>
+		        		</tr>
+		        		<tr>
+		        			<td colspan="2"> <div class="dado1"> Total </div><br><div class="dado2"> <strong>{{elemento.total}}</strong> </div> </td>
+		        		</tr>
+		        	</table>
+		        </div>
+		      </div>
+		    </div>
+		  </div> 
+		</div>
+
+	</router-view>
+
+	<div v-show="mostrar_simulador">
+		<div class="todo_simulador">
+			<div class="row">
+				<div class="comparar-rendimentos">
+					<div class="titulo">
+						Comparar rendimentos da poupança com
+					</div>
+					<br>
+						<strong>
+						<ul class="list-inline">
+							<li>CDB</li>
+							<li>LCI</li>
+							<li>LCA</li>
+							<li>Fundos</li>
+						</ul>
+						</strong>
+				</div>
+			</div>
+
+			<div class="simulador" id="simulador">
+				
+				<div class="atributo">
+				    <label >Invista<br> R$</label>
+				    <input type="text" name="" v-model="valor">
+				    <input type="range" class="slider" v-model="valor" min="0" step="5000" max="50000">
+				</div>
+				<div class="atributo">
+				    <label for="">Durante<br></label>
+				    <input type="text" name="" v-model="anos"><label>anos</label>
+				    <input type="range" class="slider" v-model="anos" min="1" step="1" max="10">
+				</div>
+
+				<div class="valor-simulacao">
+					<div class="final-simulacao">
+						{{valor | maiorValorSimulacao(rent5,anos)}}
+					</div><br>
+					<div class="info-final-simulacao">
+						Rendimentos baseados nas suas finanças
+					</div>
+				</div>
+
+
+				<div class="plotagem">
+					<div class="barra barra1">
+						<span class="ganho">
+							Rendeu {{ valor | calcularRentabilidade(rent1,anos) | calculaPorcentagem(valor)}}<br>
+							 {{ valor | calcularRentabilidade(rent1,anos)}}
+							
+						</span>
+						<span class="banco">
+							Poupança
+						</span>
+					</div>
+					<div class="barra barra2">
+						<span class="ganho">
+							Rendeu {{ valor | calcularRentabilidade(rent2,anos) | calculaPorcentagem(valor)}}<br>
+							 {{ valor | calcularRentabilidade(rent2,anos)}}
+						</span>
+						<span class="banco">
+							LCA Banco 2
+							<br><button class="btn botao-colorido" data-toggle="modal" data-target="#exampleModalCenter">Investir</button>
+						</span>
+					</div>
+					<div class="barra barra3">
+						<span class="ganho">
+							Rendeu {{ valor | calcularRentabilidade(rent3,anos) | calculaPorcentagem(valor)}}<br>
+							 {{ valor | calcularRentabilidade(rent3,anos)}}
+						</span>
+						<span class="banco">
+							LCI Banco 1
+							<br><button class="btn botao-colorido" data-toggle="modal" data-target="#exampleModalCenter">Investir</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      	<h3 class="modal-title" id="exampleModalLongTitle"><strong>Fundo de Ações</strong><br>Banco 1</h3>
+        Risco: Sofisticado<br>
+        Liquidez: D+3<br>
+        Saldo disponível: R$ 23.533<br>
+        <select>
+        	<option>Banco</option>
+        	<option>Banco1</option>
+        	<option>Banco2</option>
+        </select><br>
+        <input type="" name="" placeholder="Valor do investimento R$"><br>
+        <button class="btn botao-colorido" data-dismiss="modal" aria-label="Close" >Investir</button>
+      </div>
+    </div>
+  </div>
+</div>
+						</span>
+					</div>
+					<div class="barra barra4">
+						<span class="ganho">
+							Rendeu {{ valor | calcularRentabilidade(rent4,anos) | calculaPorcentagem(valor)}}<br>
+							 {{ valor | calcularRentabilidade(rent4,anos)}}
+						</span>
+						<span class="banco">
+							CDB Banco 3
+							<br><button class="btn botao-colorido" data-toggle="modal" data-target="#exampleModalCenter">Investir</button>
+						</span>
+					</div>
+					<div class="barra barra5">
+						<span class="ganho">
+							Rendeu {{ valor | calcularRentabilidade(rent5,anos) | calculaPorcentagem(valor)}}<br>
+							 {{ valor | calcularRentabilidade(rent5,anos)}}
+						</span>
+						<span class="banco">
+							Fundo de Ações Banco 3
+							<br><button class="btn botao-colorido" data-toggle="modal" data-target="#exampleModalCenter">Investir</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="popResgate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      	<h3 class="modal-title" id="exampleModalLongTitle"><strong>Fundo DI</strong><br>Banco 3
+        Valor de resgate: R$ 23.533<br>
+        <select>
+        	<option>Banco</option>
+        	<option>Banco1</option>
+        	<option>Banco2</option>
+        </select><br>
+        <input type="" name="" placeholder="Valor do investimento R$"><br>
+        <button class="btn botao-colorido" data-dismiss="modal" aria-label="Close" onclick="alerta()">Resgatar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	function alerta(){
+		alert("Transações realizada com Sucesso")
+	} 
+</script>
+
+<!-- ############################################################################# -->
+<!-- ############################################################################# -->
+<!-- ############################################################################# -->
+<!-- ############################################################################# -->
+<!-- ############################################################################# -->
+<!-- ############################################################################# -->
+<!-- ############################################################################# -->
+<!-- ############################################################################# -->
+<!-- ############################################################################# -->
+	<template id="teste">
+		<div class="barra-informacoes container" id="barra-informacoes">	
+			<div class="cabecalho">
+				<div class="sair btn pull-right ">Sair <img src="ic_exit_to_app_white_18dp.png"></div>
+				<div class="logo"><img src="Logo – branco.png"></div>
+			</div>
+
+			<div class="container incarte">
+			  <div class="panel-group">
+			    <div class="panel panel-default">
+			      <div class="panel-heading" id="cabecalho-somatorio">
+			        <h4 class="panel-title">
+			          	<div class="texto-informacao">
+			          		Saldo total 
+			          	</div>
+
+			          	<div class="interrogacao">
+			          		<img src="ic_help_outline_white_48dp.png">
+			          	</div>
+			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+			          	<div class="somatorio">
+			          		R$ <slot name="somatorio_saldo"></slot>
+			          		<br>
+			          		<hr class="linha-somatorio">
+			          	</div>
+			          </a>
+			        </h4>
+			      </div>
+			      <div id="collapse1" class="panel-collapse collapse">
+			        <div class="panel-body">
+			        	<slot name="somas_saldo"></slot>
+			        </div>
+			      </div>
+			    </div>
+			  </div> 
+			</div>
+
+			<div class="container incarte">
+			  <div class="panel-group">
+			    <div class="panel panel-default">
+			      <div class="panel-heading" id="cabecalho-somatorio">
+			        <h4 class="panel-title">
+			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+			          	<div class="texto-informacao">
+			          		Total Investido 
+			          	</div>
+
+			          	<div class="interrogacao">
+			          		<img src="ic_help_outline_white_48dp.png">
+			          	</div>
+			          	<div class="somatorio">
+			          		R$ <slot name="somatorio_investido"></slot>
+			          		<br>
+			          		<hr class="linha-somatorio">
+			          	</div>
+			          </a>
+			        </h4>
+			      </div>
+			      <div id="collapse2" class="panel-collapse collapse">
+			        <div class="panel-body">
+			        	<slot name="somas_investido"></slot>
+			        </div>
+			      </div>
+			    </div>
+			  </div> 
+			</div>
+
+			<div class="container incarte">
+			  <div class="panel-group">
+			    <div class="panel panel-default">
+			      <div class="panel-heading" id="cabecalho-somatorio">
+			        <h4 class="panel-title">
+			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+			          	<div class="texto-informacao">
+			          		Rendimentos * 
+			          	</div>
+
+			          	<div class="interrogacao">
+			          		<img src="ic_help_outline_white_48dp.png">
+			          	</div>
+			          	<div class="somatorio">
+			          		R$ <slot name="somatorio_rendimento"></slot>
+			          		<br>
+			          		<hr class="linha-somatorio">
+			          	</div>
+			          </a>
+			        </h4>
+			      </div>
+			      <div id="collapse3" class="panel-collapse collapse">
+			        <div class="panel-body">
+			        	<slot name="somas_rendimento"></slot>
+			        </div>
+			      </div>
+			    </div>
+			  </div> 
+			</div>
+
+			<footer class="bottom-align-text">
+				* Informações relativas a investimentos pré-fixados
+			</footer>
+
+		</div>
+	</template>
+
+	<template id="menu">
+		<nav>
+			<ul class="list-inline lista-menu">
+				<li onclick="myFunction()"><router-link to="/inicio">Inicio</router-link></li>
+				<li><router-link to="/simulador">Simulador</router-link></li>
+				<li><router-link to="/investir">Investir</router-link></li>
+			</ul>
+		</nav>
+
+	</template>
+
+	<template id="sanfonas">
+			<div class="direito">
+
+				<div class="home">
+					<div class="panel">
+						<div class="panel-header caixa-cabecalho">
+							<ul class="list-inline lista-detalhes" id="titulo-sanfoninha">
+								<li>Produto</li>
+								<li>Emissor</li>
+								<li>Risco</li>
+								<li>Rentabilidade</li>
+								<li>Detalhes</li>
+							</ul>
+						</div>
+						<div class="panel-body">
+
+							<slot name="sanfoninha"></slot>
+
+						</div>
+					</div>
+				</div>
+			</div>
+	</template>
+
+	<template id="pagina-simulador">
+	<div class="todo_simulador">
+		<div class="row">
+			<div class="comparar-rendimentos">
+				<div class="titulo">
+					Comparar rendimentos da poupança com
+				</div>
+				<br>
+					<strong>
+					<ul class="list-inline">
+						<li>CDB</li>
+						<li>LCI</li>
+						<li>LCA</li>
+						<li>Fundos</li>
+					</ul>
+					</strong>
+			</div>
+		</div>
+
+		<div class="simulador" id="simulador">
+			
+			<div class="atributo">
+			    <label >{{valor}} Invista<br> R$</label>
+			    <input type="text" name="" v-bind:v-model="valor">
+			    <input type="range" class="slider" v-model="valor" min="0" step="5000" max="50000">
+			</div>
+			<div class="atributo">
+			    <label for="">Durante<br></label>
+			    <input type="text" name="" v-model="anos"><label>anos</label>
+			    <input type="range" class="slider" v-model="anos" min="1" step="1" max="10">
+			</div>
+
+			<div class="valor-simulacao">
+				<div class="final-simulacao">
+					31269,88
+				</div><br>
+				<div class="info-final-simulacao">
+					Rendimentos baseados nas suas finanças
+				</div>
+			</div>
+
+
+			<div class="plotagem">
+				<div class="barra barra1">
+					<span class="ganho">
+						Rendeu 965,53
+					</span>
+					<span class="banco">
+						Poupança
+					</span>
+				</div>
+				<div class="barra barra2">
+					<span class="ganho">
+						Rendeu 1.072,56
+					</span>
+					<span class="banco">
+						LCA Banco 2
+						<br><div class="btn botao-colorido">Investir</div>
+					</span>
+				</div>
+				<div class="barra barra3">
+					<span class="ganho">
+						Rendeu 1.147,37
+					</span>
+					<span class="banco">
+						LCI Banco 1
+						<br><div class="btn botao-colorido">Investir</div>
+					</span>
+				</div>
+				<div class="barra barra4">
+					<span class="ganho">
+						Rendeu 1.228,17
+					</span>
+					<span class="banco">
+						CDB Banco 3
+						<br><div class="btn botao-colorido">Investir</div>
+					</span>
+				</div>
+				<div class="barra barra5">
+					<span class="ganho">
+						Rendeu 1.269,88
+					</span>
+					<span class="banco">
+						Fundo de Ações Banco 3
+						<br><div class="btn botao-colorido">Investir</div>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	</template>
+
+	<template id="pagina-investir">
+	<div class="tudo-pagina-investir">
+		<div class="filtos">
+			Filtrar por
+			
+			<div class="filto">
+				<div class="dropdown">
+				    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Risco
+				    <span class="caret"></span></button>
+				    <ul class="dropdown-menu">
+				      <li>Conservador</li>
+				    </ul>
+				</div>
+			</div>
+
+			<div class="filto">
+				<div class="dropdown">
+				    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Banco
+				    <span class="caret"></span></button>
+				    <ul class="dropdown-menu">
+				      <li>Banco 2</li>
+				    </ul>
+				</div>
+			</div>
+
+		</div>
+
+		
+	</div>
+	</template>
+
+</body>
+	<script type="text/javascript">
+
+
+		var barra = Vue.component('barra-navegacao-esquerda',{
+			template:"#teste"
+		})
+
+		var menu = Vue.component('menu-superior',{
+			template:"#menu"
+		})
+
+		var sanfonas = Vue.component('sanfonas',{
+			template:"#sanfonas"
+		})
+
+		var pagina_simulador = Vue.component('pagina-simulador',{
+			template:"#pagina-simulador"
+		})
+
+		var pagina_investir = Vue.component('pagina-investir',{
+			template:"#pagina-investir"
+		})
+
+		var router = new VueRouter({
+            routes : [
+            	{ path:'/', component: sanfonas },
+                { path:'/inicio', component: sanfonas },
+                { path:'/investir', component: pagina_investir },
+            ]
+        });
+
+		var site = new Vue({
+			el:"#site",
+			router,
+			data:{
+				//dados barra lateral direita
+				somatorio_saldo:"85,00",
+				somas_saldo:[
+					{banco:"B1",valor:60},
+					{banco:"B2",valor:25}
+				],
+
+				somatorio_investido:"0",
+				somas_investido:[
+				],
+
+				somatorio_rendimento:"0",
+				somas_rendimento:[
+				],
+
+				// dados indicacao melhor investimento home
+
+				lista_investimentos_home:[
+					
+				],
+
+				mostrar_simulador:true,
+				valor : 50000,
+				anos : 1,
+
+				rent1:1.05,
+				rent2:1.07,
+				rent3:1.08,
+				rent4:1.09,
+				rent5:1.12,
+
+				tem_investimento:true,
+
+
+			},
+
+			methods:{//metodos exclusivos do objeto
+				entrarSimulador(){
+					site.mostrar_simulador = true
+				},
+				sairSimulador(){
+					site.mostrar_simulador = false
+				},
+			},
+
+			filters:{
+				calcularRentabilidade(valor,rentabilidadeAnual,anos){
+					var v = parseInt(valor)
+					var rentabilidadeFinal = v
+					for (var i = 0; i < anos; i++) {
+						rentabilidadeFinal = rentabilidadeAnual*rentabilidadeFinal
+					}
+					return (rentabilidadeFinal-v).toFixed(2)
+				},
+
+				calculaPorcentagem(valorFinal,valorInicial){
+					return ((valorFinal/valorInicial)*100).toFixed(2).toString()+"%"
+				},
+
+				maiorValorSimulacao(valor,jurosAnuais,anos){
+					var valorFinal = valor
+					for (var i = 0; i <anos; i++) {
+					 	valorFinal*=jurosAnuais
+					 } 
+					return valorFinal.toFixed(2).toString()
+				}	
+			},
+		})
+
+		$(site.lista_investimentos_home[0]["id_investimento"]).addClass('in');
+	</script>
+
+</html>

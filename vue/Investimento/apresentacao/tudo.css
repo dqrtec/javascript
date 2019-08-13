@@ -1,0 +1,391 @@
+		.lista-menu{
+			width: 350px;
+			margin-top: 60px;
+		}
+		.menu-superior{
+			position: relative;
+			margin-left: 380px;
+			display: inline-block;
+		}
+		a:link{
+			text-decoration:none;
+		} 
+		a:active{
+			text-decoration:none;
+			border:none;
+		}
+		a{
+			outline:none
+		}
+		.panel-default > .panel-heading + .panel-collapse > .panel-body {
+			border: none;
+		}
+		.cor-corpo-sanfoninha{
+			background-color: #f0f0f0;
+		}
+
+		li {
+			color: #00ffff
+		}
+		.panel-body {
+    		padding: 0px;
+		}
+
+		.barra-informacoes{
+
+			float: left;
+			position: fixed;
+			height: 100%;
+			width: 30%;
+			background-color: #7054F9;
+			margin-left: 0px;
+			margin-top: 0px;
+			color: #fff;
+			display: inline-block;
+		}
+
+		.logo img{
+			display: inline-block;
+			width: 120px;
+			height: 60px;
+			margin-top: 30px;
+			margin-left: 15px;
+		}
+		.sair{
+			margin-top: 55px;
+			display: inline-block;
+			border-radius: 20%;
+			border-color: #fff;
+		}
+		.sair img{
+			width: 20px;
+		}
+
+		.texto-informacao{
+			color: #24CC9B;
+			display: inline-block;
+		}
+
+		.interrogacao {
+			display: inline-block;
+		}
+		.interrogacao img{
+			margin-left: 5px;
+			display: inline-block;
+			width: 20px;
+		}
+
+		.nome-banco{
+			color: gray;
+			display: inline-block;
+		}
+
+		.valor-banco{
+			color: green;
+			display: inline-block;
+		}
+
+		.linha-somatorio{
+			width: 98%;
+			border: solid 1px #fff;
+			border-radius: 1%;
+			margin-top: 0px;
+			margin-left: 1px;
+		}
+
+		.somatorio{
+			padding-top: 15px;
+			color: #fff;
+			font-size: 30px;
+		}
+
+		.panel-heading{
+			background-color: #7054F9;
+		}
+
+		.info-final-simulacao{
+			position: relative;
+			bottom: 10px;
+			left: 10px;
+			white-space: nowrap;
+		}
+
+		#cabecalho-somatorio{
+			padding-bottom: 0px;
+			background-color: #7054F9;
+		}
+
+		.incarte{
+			border :0px;
+			width: 100%;
+			margin-top: 12px;
+		}
+		.panel-default{
+			border: none;
+		}
+
+		#collapse1{
+			margin-left: 10px;
+		}
+
+		.botao-colorido{
+			border-radius: 100px;
+			background-image: linear-gradient(to right, #7450fe 0%, #7450fe 50%, #21d397 100%);
+			border: 1px solid #fff;
+			color: #fff;
+			-webkit-transition: background-image 0.2s ease-in-out;
+			transition: background-image 0.2s ease-in-out;
+		}
+
+		.botao-colorido:hover{
+			background-image: linear-gradient(to right, #21d397 0%, #7450fe 50%, #7450fe 100%);
+			color: #fff;
+		}
+
+		.router-link-active {
+		  font-size: 18px;
+		  border-bottom: solid 1px #24CC9B;
+		}
+		.letra-pequena{
+			font-size: 10px;
+		}
+		.letra-maior{
+			font-size: 14px;
+		}
+
+		.barra{
+			margin: 60px;
+			position: relative;
+			display: inline-block;
+		}
+
+		.barra-cinza{
+			background-color: gray;
+			height: 30px;
+			width: 60px;
+		}
+
+		.barra-roxa{
+			background-color: #7054F9;
+			height: 80px;
+			width: 60px;
+		}
+
+		.barra .ganho{
+			position: absolute;
+			bottom: 100%;
+			left: 50%;
+			margin-left: -30px;
+		}
+
+		.barra .banco{
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			margin-left: -30px;
+			width: 120px;
+		}
+
+		.botao-bonito{
+			margin-left: 60px;
+		}
+
+		.rotulo{
+			color: #000;
+			font-size: 15px;
+		}
+		
+		.dado1{
+			color: #000;
+			font-size: 18px;
+		}
+
+		.dado2{
+			color: #000;
+			font-size: 36px;
+		}
+
+		.table tbody  tr  td{
+			border-top: none;
+		}
+
+		.lista-detalhes li{
+			color: #000;
+			margin-left: 100px;
+			margin-top: 30px
+		}
+
+		.caixa-cabecalho{
+			margin-top: 110px;
+			margin-left: 20px;
+			width: 100%;
+		}
+
+		#titulo-sanfoninha{
+			margin-top: -100px;
+		}
+
+		.direito{
+			margin-left: 360px;
+		}
+
+		.comparar-rendimentos{
+			margin-left: 30%;
+			margin-top: 10px;
+    		width: 40%;
+    		height: 100px;
+    		border: 1px solid #aaa;
+			border-radius: 2%;
+			padding-bottom: -100px;
+    	}
+    	.titulo{
+    		margin-left: 20%;
+    	}
+
+    	.list-inline li{
+    		margin-left: 10%;
+    		color: #000;
+		}
+
+    	.simulador{
+			width: 100%;
+			position: relative;
+			left: 10px;
+    	}
+
+    	
+
+    	.slider {
+    	  -webkit-appearance: none;
+    	  height: 3px;
+    	  border-radius: 5px;
+    	  background: #00ffff;
+    	  outline: none;
+    	  opacity: 0.7;
+    	  -webkit-transition: .2s;
+    	  transition: opacity .2s;
+    	}
+
+    	.slider:hover {
+    	  opacity: 1;
+    	}
+
+    	.atributo{
+    		display: inline-block;
+    	}
+
+    	.slider::-webkit-slider-thumb {
+    	  -webkit-appearance: none;
+    	  appearance: none;
+    	  width: 15px;
+    	  height: 15px;
+    	  border-radius: 50%;
+    	  background: #00ffff;
+    	  cursor: pointer;
+    	}
+
+    	.slider::-moz-range-thumb {
+    	  width: 15px;
+    	  height: 15px;
+    	  border-radius: 50%;
+    	  background: #00ffff;
+    	  cursor: pointer;
+    	}
+
+    	.valor-simulacao{
+    		display: inline-block;
+    		margin-left: 20px;
+    	}
+    	.final-simulacao{
+			font-size: 30px;
+			bottom: 0px;
+			float: left;
+    	}
+
+
+
+
+    	.barra{
+    		margin: 60px;
+    		position: relative;
+    		display: inline-block;
+    	}
+
+    	.barra .ganho{
+    		position: absolute;
+    		bottom: 100%;
+    		left: 50%;
+    		margin-left: -30px;
+    	}
+
+    	.barra .banco{
+    		position: absolute;
+    		top: 100%;
+    		left: 50%;
+    		margin-left: -30px;
+    		width: 120px;
+    	}
+
+
+
+    	.botao-bonito{
+    		margin-left: 60px;
+    	}
+
+
+
+    	.barra1{
+    		background-color: rgb(0, 238, 255);
+    		height: 21px;
+    		width: 60px;
+    	}
+    	.barra2{
+    		background-color: blue;
+    		height: 31px;
+    		width: 60px;
+    	}
+    	.barra3{
+    		background-color: blue;
+    		height: 36px;
+    		width: 60px;
+    	}
+    	.barra4{
+    		background-color: blue;
+    		height: 41px;
+    		width: 60px;
+    	}
+    	.barra5{
+    		background-color: blue;
+    		height: 57px;
+    		width: 60px;
+    	}
+
+    	.todo_simulador{
+    		margin-left: 30%;
+    	}
+
+/*	IVESTIMENTO */
+
+    	.filto{
+    		display: inline-block;
+    	}
+
+    	.data-resgate{
+    		display: inline-block;
+    	}
+
+    	#do-lado{
+    		display: inline-block;
+    	}
+    	.investimento{
+    		width: 300px;
+    		height: 800px;
+    		display: inline-block;
+    	}
+
+
+/* fim	IVESTIMENTO */
+
+		.tudo-pagina-investir{
+			margin-left: 30%;
+		}
