@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://unpkg.com/vue" ></script>
+</head>
+<body>
+
+<div id="app">
+	{{nomeCompleto()}}
+	<menu-bar v-bind:itens="[{label:'a'},{label:'b'},{label:'c'}]"></menu-bar>
+</div>
+
+<template id="menu">
+	<ul>
+		<li v-for="item in itens"> 
+			<a v-bind:href="item.label | URLLink2">
+				{{item.label}}
+			</a>
+		</li>
+	</ul>
+</template>
+
+<script >
+
+	Vue.component('menu-bar',{
+		template:"#menu",
+		props:["itens"]
+	})
+
+	var app = new Vue({
+		el:"#app",
+		data:{
+			nome:"hariamy",
+			sobrenome:"Ferrerira",
+		},
+		filters:{
+			URLLink2(nome){
+				return "daniel/"+nome
+			}
+		},
+		methods:{
+			nomeCompleto(){
+				return this.nome +" "+ this.sobrenome
+			},
+			URLLink(nome){
+				return "daniel/"+nome
+			}
+		},
+		watch:{
+		},
+		computed:{
+			nomeCompleto2(){
+				return this.nome +" "+ this.sobrenome
+			}
+		}
+	})
+
+</script>
+</body>
+</html>
