@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://unpkg.com/vue" ></script>
+</head>
+<body>
+
+<div id="app" class="container">
+	<todo></todo>
+	<cartao v-for="(elemento,index) in listaTodo">
+		<input type="checkbox" name="" v-model="elemento.feito">
+		{{elemento.tarefa}}
+	</cartao>
+</div>
+
+<template id="main">
+	<div>
+		<input name="atividade" v-on:keyup.enter="add" placeholder="Digite uma atividade" > <input type="submit" name="" value="enviar" v-on:click="add">
+
+	</div>
+</template>
+
+<template id="cartao">
+	<div class="card"> 
+		<slot></slot>
+	</div>
+</template>
+
+<script >
+
+	Vue.component('todo',{
+		template:"#main",
+		methods:{
+			add($event) {
+				app.listaTodo.push({tarefa:$event.target.value, feito:false}  )
+			},
+		},
+		props:["itens"]
+	})
+
+	Vue.component('cartao',{
+		template:"#cartao",
+		props:["itens"]
+	})
+
+	var app = new Vue({
+		el:"#app",
+		data:{
+			listaTodo:[
+				{tarefa:"tarefa1",feito:true},
+				{tarefa:"tarefa2",feito:false},]
+		},
+		filters:{},
+		methods:{},
+		watch:{},
+		computed:{}
+	})
+
+</script>
+</body>
+</html>
