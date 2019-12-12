@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title></title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+<!-- https://www.youtube.com/watch?v=xrxDk1zLKdc -->
+
+<div class="container"></div>
+
+    <form action="/upload" method="POST" class="form-inline form-group">
+
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Funcao</h1>
+              <p class="lead">
+                <h5 class="card-title">Funcao a ser testada</h5>
+                <textarea name="funcao" rows="10" cols="60" class="form-control ">function( numero ){
+                  return String(numero*10)
+              }</textarea>
+              </p>
+            </div>
+        </div>
+&nbsp
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">HTML</h1>
+              <p class="lead">
+                <h5 class="card-title">Funcao a ser testada</h5>
+                <textarea rows="10" cols="60" name="pagina" class="form-control ">            <body>
+                    aqui {{5}} um corpo {{10}}
+                </body>
+            
+                </textarea>
+              </p>
+            </div>
+        </div>
+
+        
+        
+        <input type="submit" value="Enviar" class="btn btn-primary mb-2">
+
+    </form>
+</body>
+</html>

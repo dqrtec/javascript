@@ -1,0 +1,28 @@
+{
+  "name": "script",
+  "version": "1.0.0",
+  "description": "MIT",
+  "main": "eval.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm install && nodemon eval.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": ">=3.0.0",
+    "express-form": "^0.12.6",
+    "express-form-post": "^1.4.2",
+    "nodemon": "^1.19.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dqrtec/script.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dqrtec/script/issues"
+  },
+  "homepage": "https://github.com/dqrtec/script#readme"
+}
